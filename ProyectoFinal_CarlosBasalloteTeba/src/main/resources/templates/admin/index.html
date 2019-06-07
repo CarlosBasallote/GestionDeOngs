@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="../../images/favicon.ico">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/MainPlantilla.css" rel="stylesheet">
+<title>Main</title>
+<style>
+.menuses {
+	background-color: #337ab7;
+}
+</style>
+</head>
+
+<body>
+	<div class="page-container">
+		<div class="left-content">
+			<div class="inner-content">
+				<div class="header-section">
+					<div class="top_bg">
+
+						<div class="header_top">
+							<div class="top_right">
+								<ul>
+									<li><p th:text="${usuario.nombre}">ADMINISTRATOR |</p></li>
+									<li><a th:href="@{index}">HOME</a></li>
+									<li><p>| CONTACT</p></li>
+								</ul>
+							</div>
+							<div class="top_left">
+								<div id="loginContainer" class="login">
+									<a href="/logout" class="sidebar-icon login">Logout</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="header_bg">
+
+					<div class="header">
+						<div class="head-t"></div>
+						<div></div>
+
+						<div class="clearfix"></div>
+
+						<div class="content">
+							<div class="cajaExterior_contenido panel">
+								<label> CLICK ON THE MAP TO LIST BY CONTINENT:</label>
+								<div class="panel panel-widget">
+									<div class="titulo_en_contenido"></div>
+									<div class="panel-body">
+										<img src="../images/mapa2.png" width="960" height="516"
+											border="0" usemap="#map" />
+
+										<map name="map">
+
+											<area th:href="@{Africa}" target="_self" shape="poly"
+												coords="446,209,423,210,402,264,413,314,458,315,483,352,491,445,550,436,597,389,595,350,573,349,596,291,599,280,575,286,535,215,490,214,478,200"
+												th:value="Africa" />
+											<area th:href="@{Europa}" target="_self" shape="poly"
+												coords="390,88,419,205,454,203,478,197,496,212,533,210,520,192,554,173,563,70,487,63,464,70"
+												th:value="Europa" />
+											<area th:href="@{Asia}" target="_self" shape="poly"
+												coords="573,49,555,180,529,194,579,280,615,264,621,247,637,263,645,330,674,314,688,267,717,349,774,362,807,354,803,312,791,248,855,193,869,160,959,95,952,59,707,30,663,29"
+												th:value="Asia" />
+											<area th:href="@{Oceania}" target="_self" shape="poly"
+												coords="745,385,766,447,802,440,846,486,937,472,937,432,941,328,813,318,810,353,767,373"
+												th:value="Oceania" href="" />
+											<area th:href="@{SurAmerica}" target="_self" shape="poly"
+												coords="255,281,234,326,256,392,245,504,292,514,333,421,374,339,310,296,296,269,284,274"
+												th:value="SurAmerica" />
+											<area th:href="@{NorteAmerica}" target="_self" shape="poly"
+												coords="9,58,14,156,86,142,173,284,236,303,251,277,301,263,253,221,323,163,279,81,134,46,114,55"
+												th:value="NorteAmerica" />
+										</map>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="footer">
+
+							<div class="clearfix"></div>
+							<p>© 2018 Salesianos Triana. All Rights Reserved | Design by
+								Carlos Basallote Teba</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="sidebar-menu">
+			<header>
+				<div>
+					<a th:href="@{index}"><img class="logo"
+						src="../../images/Logo.png"></a>
+				</div>
+			</header>
+			<div style="border-top: 1px ridge rgba(255, 255, 255, 0.15)"></div>
+			<div class="menu">
+				<ul id="menu">
+
+					<li th:unless="${listaOngs.empty}"
+						style="background-color: #337ab7;"><a
+						style="background-color: #337ab7;"><i class="fa fa-table"></i>
+							<span class="menuses">Menus' ONGs <span
+								class="glyphicon glyphicon-chevron-right"></span></span> <span
+							class="fa fa-angle-right" style="float: right"></span></a>
+						<ul id="menu-academico-sub" th:field="*{ong}">
+							<li th:each="ong : ${listaOngs}"><a th:value="${ong.id}"
+								th:text="${ong.nombre}" th:href="@{viewOng/{id} (id=${ong.id})}">Menú
+									ONG en concreto</a></li>
+						</ul></li>
+					<li><a th:href="@{ongs}"><i class="lnr lnr-layers"></i> <span>ONGs'
+								list</span> </a></li>
+					<li><a th:href="@{voluntarios}"><i class="lnr lnr-layers"></i>
+							<span>Volunteers' list</span> </a></li>
+					<li><a th:href="@{addOng}"><i class="fa fa-table"></i> <span>Register
+								Ong</span></a></li>
+					<li><a th:href="@{addVoluntario}"><i
+							class="fa fa-tachometer"></i> <span>Register Volunteer</span></a></li>
+
+					<li><a th:href="@{topOngs}"><i class="fa fa-file-text-o"></i>
+							<span>Top ONGs</span>&nbsp;<span class="glyphicon glyphicon-king"></span></a></li>
+
+					<li><a th:href="@{topVoluntarios}"><i
+							class="fa fa-file-text-o"></i> <span>Top voluntarios</span>&nbsp;<span
+							class="glyphicon glyphicon-sort"></span></a></li>
+
+					<li><a th:href="@{comentarios}"><i
+							class="fa fa-file-text-o"></i> <span>Update info.</span>&nbsp;<span
+							class="glyphicon glyphicon-info-sign"></span></a>
+					<li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+</body>
+</html>

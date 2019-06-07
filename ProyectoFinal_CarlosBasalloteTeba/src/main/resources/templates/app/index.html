@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="../../images/favicon.ico">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/MainPlantilla.css" rel="stylesheet">
+<title>Main</title>
+<style>
+.menuses {
+	background-color: #337ab7;
+}
+
+.thumbnail {
+	padding: 10px;
+	background-color: rgba(110, 141, 223, 0.7);
+}
+
+.fondocontri {
+	font-weight: bolder;
+	background-color: #618d3cd4;
+	padding: 10px;
+}
+
+.fondog {
+	font-weight: bolder;
+	background-color: #618d3cd4;
+	padding: 10px;
+}
+
+.fondnom {
+	padding-left: 30px;
+	text-transform: uppercase;
+	background-color: #d06b23e6;
+	padding-bottom: 10px;
+}
+
+.head-t {;
+	margin: 0px 0px 0px 2px;
+	font-weight: bolder;
+	padding: 10px 1px 10px 20px;
+	background-color: rgba(44, 109, 0, 0.7);
+}
+</style>
+<script type="text/javascript">
+	function myFunction(donado) {
+		alert('¡Muchas gracias, donaste ' + donado
+				+ '€! (En My Ong podrá ver materializado su contribución');
+	}
+</script>
+</head>
+
+<body>
+	<div class="page-container">
+		<div class="left-content">
+			<div class="inner-content">
+				<div class="header-section">
+					<div class="top_bg">
+
+						<div class="header_top">
+							<div class="top_right">
+								<ul>
+									<li><a th:text="${usuario.nombre}" th:href="@{index}">USER</a></li>
+									<li><p>| CONTACT</p></li>
+								</ul>
+							</div>
+							<div class="top_left">
+								<div id="loginContainer" class="login">
+									<a href="/logout" class="sidebar-icon login">Logout</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="header_bg">
+
+					<div class="header">
+
+						<div class="clearfix"></div>
+
+						<div class="">
+
+							<div class="thumbnail">
+								<img height="450" width="400" th:unless="${usuario.foto==null}"
+									th:src="${usuario.foto}" class="img-responsive img-circle" />
+								<img th:if="${usuario.foto==null}" src="../../images/noFoto.png"
+									class="img-responsive img-circle" />
+								<div class="caption">
+									<div class="row">
+										<div class="col-md-6 col-xs-6 fondnom">
+											<h3 th:text="${usuario.nombre}"
+												class="font-weight-bold pull-center fondnom">Nombre</h3>
+											<h4 th:text="${usuario.apellidos}" class="fondnom">Apellidos</h4>
+											<h4 th:text="${usuario.mail}" class="fondnom">Mail</h4>
+											<div class="col-md-5">
+												<a th:if="${usuario.ong != null}"
+													th:href="@{viewOng/{id} (id=${usuario.ong.id})}"><button
+														class="btn btn-success">My ONG</button></a>
+												<p th:unless="${usuario.ong != null}">
+													<button class="btn btn-success" disabled>Without
+														ONG yet</button>
+												</p>
+											</div>
+										</div>
+										<div class="col-md-6 col-xs-6">
+											<div class="fondog">
+												<h4>ONG:</h4>
+												<h4 class="font-weight-bold text-uppercase"
+													th:if="${usuario.ong != null}"
+													th:text="${usuario.ong.nombre}">Ong</h4>
+												<h4 th:if="${usuario.ong == null}">Sin ONG</h4>
+												<h4 th:if="${usuario.ong != null}"
+													class="font-weight-bold text-uppercase"
+													th:text="${usuario.ong.pais}"></h4>
+											</div>
+											<div class="fondocontri col-md-6 col-xs-6">
+												<a th:if="${usuario.ong != null}"
+													th:href="@{voluntarioDona4/{id} (id=${usuario.id})}"><button
+														class="btn btn-primary" onclick="myFunction(25)">Donar
+														25€</button></a>
+												<p th:unless="${usuario.ong != null}"
+													th:href="@{voluntarioDona4/{id} (id=${usuario.id})}">
+													<button class="btn btn-primary" disabled>Donar 25€</button>
+												</p>
+
+												<a th:if="${usuario.ong != null}"
+													th:href="@{voluntarioDona3/{id} (id=${usuario.id})}"><button
+														class="btn btn-primary" onclick="myFunction(50)">Donar
+														50€</button></a>
+												<p th:unless="${usuario.ong != null}"
+													th:href="@{voluntarioDona3/{id} (id=${usuario.id})}">
+													<button class="btn btn-primary" disabled>Donar 50€</button>
+												</p>
+											</div>
+											<div class="fondocontri col-md-6 col-xs-6">
+												<a th:if="${usuario.ong != null}"
+													th:href="@{voluntarioDona/{id} (id=${usuario.id})}"><button
+														class="btn btn-primary" onclick="myFunction(100)">Donar
+														100€</button></a>
+												<p th:unless="${usuario.ong != null}"
+													th:href="@{voluntarioDona/{id} (id=${usuario.id})}">
+													<button class="btn btn-primary" disabled>Donar
+														100€</button>
+												</p>
+												<a th:if="${usuario.ong != null}"
+													th:href="@{voluntarioDona2/{id} (id=${usuario.id})}"><button
+														class="btn btn-primary" onclick="myFunction(200)">Donar
+														200€</button></a>
+												<p th:unless="${usuario.ong != null}"
+													th:href="@{voluntarioDona2/{id} (id=${usuario.id})}">
+													<button class="btn btn-primary" disabled>Donar
+														200€</button>
+												</p>
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+
+
+
+
+						</div>
+						<div class="footer">
+
+							<div class="clearfix"></div>
+							<p>© 2018 Salesianos Triana. All Rights Reserved | Design by
+								Carlos Basallote Teba</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="sidebar-menu">
+			<header>
+				<div>
+					<a th:href="@{index}"><img class="logo"
+						src="../../images/Logo.png"></a>
+				</div>
+			</header>
+			<div style="border-top: 1px ridge rgba(255, 255, 255, 0.15)"></div>
+			<div class="menu">
+				<ul id="menu">
+					<li><a th:href="@{topOngs}"><i class="fa fa-file-text-o"></i>
+							<span>Top ONGs</span>&nbsp;<span class="glyphicon glyphicon-king"></span></a></li>
+					<li><a th:href="@{topVoluntarios}"><i
+							class="fa fa-file-text-o"></i> <span>Top voluntarios</span>&nbsp;<span
+							class="glyphicon glyphicon-sort"></span></a></li>
+					<li><a th:href="@{comentarios}"><i
+							class="fa fa-file-text-o"></i> <span>Update info.</span>&nbsp;<span
+							class="glyphicon glyphicon-info-sign"></span></a>
+					<li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+</body>
+</html>

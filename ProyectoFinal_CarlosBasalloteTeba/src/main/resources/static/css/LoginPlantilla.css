@@ -1,0 +1,90 @@
+ body {
+        background-color: #444;
+        background: url(../images/mundo.jpg);
+        background-repeat: repeat;
+    }
+
+@font-face{
+        font-family:"museum";
+        src: url(../css/museum.ttf);
+    }
+
+    h1{
+     font-family:museum;
+     font-weight:bolder;
+     font-size: 3.2em;
+     color:#1c2310;
+    }
+
+    @media (max-width: 800px){
+        h1{
+            font-size: 1.5em;     
+        }
+        .vertical-offset-100 {
+                padding-top: 20px;
+            }
+
+    }
+    
+    .btn{
+         font-weight:bolder;
+         color:#1c2310;
+    }
+
+    img{
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+
+    .titulo{
+         background-color: rgba(146, 181, 88, 0.7);
+    }
+
+
+    .form-login {
+    background-color: rgba(146, 181, 88, 0.7);
+    margin-top: 10%;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 2px 0 #1c2310;
+}
+    .vertical-offset-100 {
+        padding-top: 50px;
+    }
+    .panel {
+    margin-bottom: 20px;
+    background-color: rgba(146, 181, 88, 0.7);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
+
+    h4 { 
+     border:0 solid #fff; 
+     font-weight: bolder;
+     font-size: 2em;
+     color:#1c2310;
+     border-bottom-width:1px;
+     padding-bottom:10px;
+     text-align: center;
+    }
+
+    .contact{
+        color:#1c2310;
+        font-weight: bolder;
+    }
+    
+    .error{
+    	color:red;
+    	font-weight:bold;
+    	text-align:center;
+    	text-transform:uppercase;
+    }
+    

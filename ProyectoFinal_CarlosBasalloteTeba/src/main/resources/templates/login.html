@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/LoginPlantilla.css" rel="stylesheet">
+<title>LOGIN</title>
+<style>
+	.enlace_desactivado {
+pointer-events: none;
+cursor: default;
+}
+
+</style>
+</head>
+<body>
+
+	<div class="titulo col-md-12">
+		<div class="col-md-6 col-md-offset-3 panel-body">
+			<h1>
+				<img src="images/HandR.png"> V O L U N T I F Y <img
+					src="images/HandL.png">
+			</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row vertical-offset-100">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel-body">
+
+					<form accept-charset="UTF-8" role="form" class="form-login"
+						th:action="@{/checkLogin}" th:object="${loginUser}" method="post">
+						<h4>Helping you to help others</h4>
+						<input type="text" id="mail"
+							class="form-control input-lg chat-input"
+							placeholder="mail or username" name="username"
+							autofocus="autofocus" th:field="*{mail}" th:value="*{mail}" /> </br>
+						<input type="password" id="password"
+							class="form-control input-lg chat-input" placeholder="password"
+							name="password" th:field="*{password}" th:value="*{password}" />
+						</br>
+						<p th:if="${loginError}" class="error">¡Wrong user or
+							password!</p>
+
+						<div class="wrapper">
+							<span
+								class="group-btn col-md-offset-4 col-sm-offset-4 col-lg-offset-4">
+								<input type="submit" value="LOG IN"
+								class="btn btn-success btn-md btn-block" />
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<nav class="navbar titulo navbar-fixed-bottom" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="enlace_desactivado navbar-brand contact">Management</a>
+		</div>
+
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav row">
+				<li><a class="enlace_desactivado contact col-md-12">About</a></li>
+				<li><a class="enlace_desactivado contact col-md-12">Support</a></li>
+				<li><a class="enlace_desactivado contact col-md-12">Contact</a></li>
+				<li><a class="enlace_desactivado contact col-md-12 col-md-offset-12">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&copy; Carlos Basallote Teba | Voluntify Gestión de Voluntarios</a></li>
+			</ul>
+		</div>
+	</nav>
+</body>
+</html>

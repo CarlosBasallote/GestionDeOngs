@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="../../images/favicon.ico">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/MainPlantilla.css" rel="stylesheet">
+<title>Main</title>
+<style>
+.menuses {
+	background-color: #337ab7;
+}
+</style>
+</head>
+
+<body>
+	<div class="page-container">
+		<div class="left-content">
+			<div class="inner-content">
+				<div class="header-section">
+					<div class="top_bg">
+
+						<div class="header_top">
+							<div class="top_right">
+								<ul>
+									<li><p th:text="${usuario.nombre}">ADMINISTRATOR |</p></li>
+									<li><a th:href="@{index}">HOME</a></li>
+									<li><p>| CONTACT</p></li>
+								</ul>
+							</div>
+							<div class="top_left">
+								<div id="loginContainer" class="login">
+									<a href="/logout" class="sidebar-icon login">Logout</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="header_bg">
+
+					<div class="header">
+						<div class="head-t"></div>
+						<div></div>
+
+						<div class="clearfix"></div>
+
+						<div class="content">
+							<div class="cajaExterior_contenido panel">
+								<div class="panel panel-widget">
+									<div class="titulo_en_contenido"></div>
+									<div class="panel-body">
+
+										<ul>
+											<li>Arreglo de búsquedas tanto en ongs como en
+												voluntarios.</li>
+											<li>Formularios más completos con desplegable en campo
+												paises en vez de introducción de texto.</li>
+											<li>Arreglo de edit ong y edit voluntario en el que se
+												borraba la imagen si no la cargábamos otra vez.</li>
+											<li>Listados Ongs y Voluntarios ya no se descuadran.</li>
+											<li>Validaciones de email e imposibilidad de introducir
+												dinero negativo</li>
+											<li>Ya no se pueden agregar dos usuarios iguales (el
+												mail es su clave user)</li>
+											<li>Agregado servicio para que el voluntario pueda donar
+												dinero desde su usuario a su Ong (si no tiene Ong se
+												desabilita temporalmente) que se suma al presupuesto de su
+												Ong</li>
+											<li>Agregado servicio de Ranking de Voluntarios</li>
+											<li>Arreglo de Ranking de Ongs</li>
+											<li>Borrado de todo lo inservible y comentado lo que
+												pueda servir para una futura ampliación</li>
+											<li>Arreglo de algunos errores de mapeo.</li>
+											<li>Arreglo de fallos que aparecen al arreglar otros
+												fallos.</li>
+											<li>Cuando no hay Ongs , la pestaña de acceso directo
+												azul desaparece porque no se necesita en ese momento.</li>
+											<li>Algún que otro arreglo en diseño.</li>
+											<li>Se recomienda no hacer zoom porque el menú de arriba
+												se mete en el side-menú , es algo de css que tiene que ver
+												con la plantilla modificada que uso. En lo demás es
+												totalmente responsive.</li>
+										</ul>
+
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="footer">
+
+							<div class="clearfix"></div>
+							<p>© 2018 Salesianos Triana. All Rights Reserved | Design by
+								Carlos Basallote Teba</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="sidebar-menu">
+			<header>
+				<div>
+					<a th:href="@{index}"><img class="logo"
+						src="../../images/Logo.png"></a>
+				</div>
+			</header>
+			<div style="border-top: 1px ridge rgba(255, 255, 255, 0.15)"></div>
+			<div class="menu">
+				<ul id="menu">
+
+					<li th:unless="${listaOngs.empty}"
+						style="background-color: #337ab7;"><a
+						style="background-color: #337ab7;"><i class="fa fa-table"></i>
+							<span class="menuses">Menus' ONGs <span
+								class="glyphicon glyphicon-chevron-right"></span></span> <span
+							class="fa fa-angle-right" style="float: right"></span></a>
+						<ul id="menu-academico-sub" th:field="*{ong}">
+							<li th:each="ong : ${listaOngs}"><a th:value="${ong.id}"
+								th:text="${ong.nombre}" th:href="@{viewOng/{id} (id=${ong.id})}">Menú
+									ONG en concreto</a></li>
+						</ul></li>
+					<li><a th:href="@{ongs}"><i class="lnr lnr-layers"></i> <span>ONGs'
+								list</span> </a></li>
+					<li><a th:href="@{voluntarios}"><i class="lnr lnr-layers"></i>
+							<span>Volunteers' list</span> </a></li>
+					<li><a th:href="@{addOng}"><i class="fa fa-table"></i> <span>Register
+								Ong</span></a></li>
+					<li><a th:href="@{addVoluntario}"><i
+							class="fa fa-tachometer"></i> <span>Register Volunteer</span></a></li>
+
+					<li><a th:href="@{topOngs}"><i class="fa fa-file-text-o"></i>
+							<span>Top ONGs</span>&nbsp;<span class="glyphicon glyphicon-king"></span></a></li>
+
+					<li><a th:href="@{topVoluntarios}"><i
+							class="fa fa-file-text-o"></i> <span>Top voluntarios</span>&nbsp;<span
+							class="glyphicon glyphicon-sort"></span></a></li>
+
+					<li><a th:href="@{comentarios}"><i
+							class="fa fa-file-text-o"></i> <span>Update info.</span>&nbsp;<span
+							class="glyphicon glyphicon-info-sign"></span></a>
+					<li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+</body>
+</html>

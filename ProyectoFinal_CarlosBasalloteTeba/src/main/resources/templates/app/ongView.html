@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="../../images/favicon.ico">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/MainPlantilla.css" rel="stylesheet">
+<title>Ong</title>
+<style>
+.thumbnail {
+	padding: 10px;
+	background-color: rgba(110, 141, 223, 0.7);
+}
+</style>
+<script type="text/javascript">
+	function del(id) {
+		if (confirm("¿Desea eliminar la ong seleccionada?")) {
+			location.href = location.protocol + '//' + location.host
+					+ "/admin/borrarOng/" + id;
+		}
+
+	}
+</script>
+</head>
+<body>
+	<div class="page-container">
+		<div class="left-content">
+			<div class="inner-content">
+				<div class="header-section">
+					<div class="top_bg">
+
+						<div class="header_top">
+							<div class="top_right">
+								<ul>
+									<li><a th:href="@{../index}">PROFILE</a></li>
+									<li><p>| CONTACT</p></li>
+								</ul>
+							</div>
+							<div class="top_left">
+								<div id="loginContainer" class="login">
+									<a href="/logout" class="sidebar-icon login">Logout</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="header_bg">
+
+					<div class="header">
+						<div class="head-t"></div>
+						<div></div>
+
+						<div class="clearfix"></div>
+
+						<div class="content">
+							<div class="cajaExterior_contenido">
+								<div class="panel panel-widget">
+									<div class="titulo_en_contenido">
+										<label> MY ONG:</label>
+									</div>
+									<div class="panel-body">
+
+										<div class="thumbnail">
+											<div class="col-md-6 col-xs-6 ">
+												<img height="450" width="400"
+													th:unless="${ong.urlImagen==null}"
+													th:src="${ong.urlImagen}" class="img-responsive thumbnail" />
+												<img th:if="${ong.urlImagen==null}"
+													src="../../images/noImage.jpg" class="img-responsive" />
+											</div>
+											<div class="caption">
+												<div class="row">
+													<div class="col-md-6 col-xs-6 ">
+														<h4 th:text="${ong.nombre}" class="pull-center">
+															<a href="#">Nombre</a>
+														</h4>
+														<p th:text="${ong.pais}">Pais</p>
+														<p th:text="${ong.continente}">Continente</p>
+
+														<p
+															th:text="${#numbers.formatDecimal(ong.presupuesto,1,2)}+'€'">Budget</p>
+
+
+													</div>
+													<div class="col-md-5 col-xs-5 ">
+														<h4 class="font-weight-bold">Volunteers:</h4>
+														<ul th:each="voluntario : ${listVoluntarios}">
+															<li th:value="${voluntario.id}"
+																th:text="${voluntario.nombre} + ' ' + ${voluntario.apellidos}">Voluntarios
+																de esta Ong</li>
+
+														</ul>
+														<p th:if="${ong.voluntarios.empty}">Not volunteers
+															yet.</p>
+													</div>
+												</div>
+
+											</div>
+
+										</div>
+										<p th:text="${ong.descripcion}" class="col-md-8 col-xs-8 "></p>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="footer">
+
+							<div class="clearfix"></div>
+							<p>© 2018 Salesianos Triana. All Rights Reserved | Design by
+								Carlos Basallote Teba</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="sidebar-menu">
+			<header>
+				<div>
+					<a th:href="@{../index}"><img class="logo"
+						src="../../images/Logo.png"></a>
+				</div>
+			</header>
+			<div style="border-top: 1px ridge rgba(255, 255, 255, 0.15)"></div>
+			<div class="menu">
+				<ul id="menu">
+					<li><a th:href="@{topOngs}"><i class="fa fa-file-text-o"></i>
+							<span>Top ONGs</span>&nbsp;<span class="glyphicon glyphicon-king"></span></a></li>
+					<li><a th:href="@{topVoluntarios}"><i
+							class="fa fa-file-text-o"></i> <span>Top voluntarios</span>&nbsp;<span
+							class="glyphicon glyphicon-sort"></span></a></li>
+
+					<li><a th:href="@{comentarios}"><i
+							class="fa fa-file-text-o"></i> <span>Update info.</span>&nbsp;<span
+							class="glyphicon glyphicon-info-sign"></span></a>
+					<li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="full" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="../../images/favicon.ico">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/MainPlantilla.css" rel="stylesheet">
+<title>Main</title>
+<style>
+.thumbnail {
+	padding: 10px;
+	background-color: rgba(110, 141, 223, 0.7);
+	max-height: 408px;
+	min-height: 408px;
+}
+
+.img-responsive {
+	min-height: 83.73px;
+	max-height: 83.73px;
+}
+</style>
+<script type="text/javascript">
+	function del(id) {
+		if (confirm("¿Desea eliminar la ong seleccionada?")) {
+			location.href = location.protocol + '//' + location.host
+					+ "/admin/borrarOng/" + id;
+		}
+
+	}
+</script>
+
+</head>
+<body>
+	<div class="page-container">
+		<div class="left-content">
+			<div class="inner-content">
+				<div class="header-section">
+					<div class="top_bg">
+
+						<div class="header_top">
+							<div class="top_right">
+								<ul>
+									<li><a th:href="@{index}">HOME</a></li>
+									<li><p>| CONTACT</p></li>
+								</ul>
+							</div>
+							<div class="top_left">
+								<div id="loginContainer" class="login">
+									<a href="/logout" class="sidebar-icon login">Logout</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="header_bg">
+
+					<div class="header">
+						<div class="head-t"></div>
+						<div></div>
+
+						<div class="clearfix"></div>
+
+						<div class="content">
+							<div class="cajaExterior_contenido">
+								<div class="panel panel-widget">
+									<div class="titulo_en_contenido">
+										<label> ONGS:</label>
+									</div>
+									<div class="panel-body">
+										<form th:action="@{searchOng}" th:object="${searchForm}"
+											method="POST">
+											<div class="col-sm-6 ">
+												<input type="text" th:field="*{searchOng}"
+													class="search-query form-control" placeholder="Buscar..." />
+											</div>
+										</form>
+										<br> <br> <br>
+										<div>
+											<div class="row" th:remove="all-but-first">
+												<div class="col-md-12">
+													<div class="col-sm-3 col-md-3" th:each=" ong : ${list}">
+														<div class="thumbnail">
+
+
+															<img th:unless="${ong.urlImagen==null}"
+																th:src="${ong.urlImagen}" class="img-responsive" /> <img
+																th:if="${ong.urlImagen==null}"
+																src="../../images/noImage.jpg" class="img-responsive" />
+															<div class="caption">
+																<div class="row">
+																	<h4 th:text="${ong.nombre}"
+																		class="text-uppercase pull-center">Nombre</h4>
+
+																	<p th:text="${ong.pais}" class="pull-center">País</p>
+
+
+
+
+																</div>
+																<p
+																	th:text="' ' + ${#lists.size(ong.voluntarios)} + ' voluntarios'"
+																	class="glyphicon glyphicon-user">Voluntarios</p>
+																<a th:href="@{javascript:del({id}) (id=${ong.id})}"><br></br>
+																	<button class="btn btn-warning" type="submit"
+																		value="submit">Borrar</button></a> <a
+																	th:href="@{editOng/{id} (id=${ong.id})}"><button
+																		class="btn btn-primary">Editar</button></a> <a
+																	th:href="@{viewOng/{id} (id=${ong.id})}"><button
+																		class="btn btn-success">Detalles</button></a>
+															</div>
+
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="footer">
+
+							<div class="clearfix"></div>
+							<p>© 2018 Salesianos Triana. All Rights Reserved | Design by
+								Carlos Basallote Teba</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="sidebar-menu">
+			<header>
+				<div>
+					<a th:href="@{index}"><img class="logo"
+						src="../../images/Logo.png"></a>
+				</div>
+			</header>
+			<div style="border-top: 1px ridge rgba(255, 255, 255, 0.15)"></div>
+			<div class="menu">
+				<ul id="menu">
+
+					<li th:unless="${listaOngs.empty}"
+						style="background-color: #337ab7;"><a
+						style="background-color: #337ab7;"><i class="fa fa-table"></i>
+							<span class="menuses">Menus' ONGs <span
+								class="glyphicon glyphicon-chevron-right"></span></span> <span
+							class="fa fa-angle-right" style="float: right"></span></a>
+						<ul id="menu-academico-sub" th:field="*{ong}">
+							<li th:each="ong : ${listaOngs}"><a th:value="${ong.id}"
+								th:text="${ong.nombre}" th:href="@{viewOng/{id} (id=${ong.id})}">Menú
+									ONG en concreto</a></li>
+						</ul></li>
+					<li><a th:href="@{ongs}"><i class="lnr lnr-layers"></i> <span>ONGs'
+								list</span> </a></li>
+					<li><a th:href="@{voluntarios}"><i class="lnr lnr-layers"></i>
+							<span>Volunteers' list</span> </a></li>
+					<li><a th:href="@{addOng}"><i class="fa fa-table"></i> <span>Register
+								Ong</span></a></li>
+					<li><a th:href="@{addVoluntario}"><i
+							class="fa fa-tachometer"></i> <span>Register Volunteer</span></a></li>
+
+					<li><a th:href="@{topOngs}"><i class="fa fa-file-text-o"></i>
+							<span>Top ONGs</span>&nbsp;<span class="glyphicon glyphicon-king"></span></a></li>
+
+					<li><a th:href="@{topVoluntarios}"><i
+							class="fa fa-file-text-o"></i> <span>Top voluntarios</span>&nbsp;<span
+							class="glyphicon glyphicon-sort"></span></a></li>
+
+					<li><a th:href="@{comentarios}"><i
+							class="fa fa-file-text-o"></i> <span>Update info.</span>&nbsp;<span
+							class="glyphicon glyphicon-info-sign"></span></a>
+					<li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+</body>
+</html>
